@@ -17,6 +17,7 @@ class DefaultColor {
 }
 
 class DefaultDimen {
+  static double spaceDoubleExtraLarge = 64.0;
   static double spaceExtraLarge = 32.0;
   static double spaceLarge = 16.0;
   static double spaceMedium = 12.0;
