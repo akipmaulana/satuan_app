@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
+          fontFamily: 'Open Sans',
           primarySwatch: Colors.blue,
         ),
         home: BlocProvider<MenuBloc>(
