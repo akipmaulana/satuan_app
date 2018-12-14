@@ -6,9 +6,6 @@ import 'package:satuan_app/src/ui/themes/default_res.dart';
 
 class MenuBloc extends BlocBase {
 
-  ///
-  /// Synchronous Stream to handle the provision of the movie genres
-  ///
   BehaviorSubject<List<Category>> _menuController = new BehaviorSubject<List<Category>>();
   Sink<List<Category>> get _inMenus => _menuController.sink;
   Stream<List<Category>> get outMenus => _menuController.stream;

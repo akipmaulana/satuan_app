@@ -6,7 +6,6 @@ import 'package:satuan_app/src/ui/themes/default_res.dart';
 import 'package:satuan_app/src/blocs/bloc_provider.dart';
 import 'package:satuan_app/src/blocs/application_bloc.dart';
 import 'package:satuan_app/src/ui/pages/category_page.dart';
-import 'package:satuan_app/src/blocs/menu_bloc.dart';
 
 class CategoryContainer extends StatelessWidget {
 
@@ -17,11 +16,6 @@ class CategoryContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final MenuBloc menuBloc = BlocProvider.of<MenuBloc>(context);
-    menuBloc.outMenus.listen((categories) {
-
-    });
-
     return new InkWell(
       highlightColor: categoryList.active.color,
       splashColor: categoryList.active.color,
@@ -30,7 +24,7 @@ class CategoryContainer extends StatelessWidget {
           CupertinoPageRoute(builder: (BuildContext context) {
             return BlocProvider<ApplicationBloc>(
               bloc: ApplicationBloc(),
-              child: CategoryPage(categoryList),
+              child: CategoryPage(categoryList: categoryList),
             );
           }),
         );

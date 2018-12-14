@@ -5,6 +5,7 @@ import 'package:satuan_app/src/models/category.dart';
 import 'package:satuan_app/src/ui/widgets/category_rectangle.dart';
 import 'package:satuan_app/src/blocs/bloc_provider.dart';
 import 'package:satuan_app/src/ui/themes/default_res.dart';
+import 'package:satuan_app/src/blocs/application_bloc.dart';
 
 class HomePage extends StatelessWidget {
 
