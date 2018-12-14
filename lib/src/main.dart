@@ -6,13 +6,15 @@ import 'blocs/menu_bloc.dart';
 
 Future<void> main() async {
   debugPrintRebuildDirtyWidgets = true;
-  return runApp(BlocProvider<ApplicationBloc>(
-    bloc: ApplicationBloc(),
-    child: BlocProvider<ApplicationBloc>(
+  return runApp(
+    BlocProvider<ApplicationBloc>(
       bloc: ApplicationBloc(),
-      child: MyApp(),
+      child: BlocProvider<ApplicationBloc>(
+        bloc: ApplicationBloc(),
+        child: MyApp(),
+      ),
     ),
-  ));
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -20,14 +22,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          fontFamily: 'Open Sans',
-          primarySwatch: Colors.blue,
-        ),
-        home: BlocProvider<MenuBloc>(
-          child: HomePage(),
-          bloc: MenuBloc(),
-        ));
+      title: 'Converter',
+      theme: ThemeData(
+        fontFamily: 'Open Sans',
+        primarySwatch: Colors.blue,
+      ),
+      home: BlocProvider<MenuBloc>(
+        child: HomePage(),
+        bloc: MenuBloc(),
+      ),
+    );
   }
 }

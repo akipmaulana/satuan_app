@@ -9,17 +9,17 @@ class DefaultWidget {
     return AppBar(
       elevation: 0.0,
       centerTitle: true,
-      title: titleBar(title),
+      title: titleBar(title, color: DefaultColor.blue),
       backgroundColor: Colors.white,
     );
   }
 
-  Text titleBar(String text, {TextStyle style}) {
+  Text titleBar(String text, {Color color}) {
     return Text(
       text,
       maxLines: 1,
       textAlign: TextAlign.center,
-      style: style == null ? _defaultStyle.textTitle() : style,
+      style: _defaultStyle.textTitle(color == null ? Colors.white : color ),
     );
   }
 

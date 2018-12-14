@@ -27,7 +27,8 @@ class HomePage extends StatelessWidget {
             return GridView.count(
               crossAxisCount: 2,
               children: snapshot.data.map((category) {
-                return new CategoryContainer(category);
+                CategoryList categoryList = CategoryList(snapshot.data, category);
+                return new CategoryContainer(categoryList);
               }).toList(),
               padding: EdgeInsets.all(DefaultDimen.spaceDoubleExtraLarge),
               crossAxisSpacing: DefaultDimen.spaceSmall,

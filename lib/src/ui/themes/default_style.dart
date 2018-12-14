@@ -13,9 +13,9 @@ class DefaultStyle {
     return new TextStyle(fontSize: DefaultDimen.textLarge, color: Colors.black);
   }
 
-  TextStyle textTitle() {
+  TextStyle textTitle(Color color) {
     return new TextStyle(
-        color: DefaultColor.blue,
+        color: color,
         fontWeight: FontWeight.bold,
         fontSize: DefaultDimen.textLarge,
     );

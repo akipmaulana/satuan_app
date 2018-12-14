@@ -18,3 +18,16 @@ class Category {
 
   Category(this.type, this.title, this.imageLocation, this.color);
 }
+
+class CategoryList {
+  final List<Category> list;
+  Category active;
+
+  CategoryList(this.list, this.active);
+
+  int get total => list.length;
+
+  void setActiveCategory({int index}) {
+    active = list[index];
+  }
+}
