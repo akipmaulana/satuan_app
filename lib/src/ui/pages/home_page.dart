@@ -25,11 +25,18 @@ class HomePage extends StatelessWidget {
         child: StreamBuilder<List<Category>>(
           stream: menuBloc.outMenus,
           builder: (BuildContext context, AsyncSnapshot<List<Category>> snapshot) {
+            if (snapshot.data == null) {
+              return Container();
+            }
             return GridView.count(
               crossAxisCount: 2,
               children: snapshot.data.map((category) {
-                CategoryList categoryList = CategoryList(snapshot.data, category);
-                return new CategoryContainer(categoryList);
+                if (snapshot.data != null) {
+                  CategoryList categoryList = CategoryList(
+                      snapshot.data, category);
+                  return new CategoryContainer(categoryList);
+                }
+                return new Container();
               }).toList(),
               padding: EdgeInsets.all(DefaultDimen.spaceDoubleExtraLarge),
               crossAxisSpacing: DefaultDimen.spaceSmall,

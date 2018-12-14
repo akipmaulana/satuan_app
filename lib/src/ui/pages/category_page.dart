@@ -5,36 +5,15 @@ import 'package:satuan_app/src/ui/themes/default_res.dart';
 import 'package:satuan_app/src/models/category.dart';
 import 'package:satuan_app/src/blocs/application_bloc.dart';
 import 'package:satuan_app/src/blocs/bloc_provider.dart';
+import 'package:satuan_app/src/ui/fragments/sample_fragment.dart';
 
-class CategoryPage extends StatefulWidget {
-
-  final CategoryList categoryList;
-  const CategoryPage({Key key, this.categoryList}) : super(key: key);
-
-  @override
-  CategoryPageState createState() => CategoryPageState();
-
-}
-
-class CategoryPageState extends State<CategoryPage> with SingleTickerProviderStateMixin<CategoryPage> {
+class CategoryPage extends StatelessWidget {
 
   DefaultWidget _defaultWidget = DefaultWidget();
-  TabController _tabController;
-  BuildContext context;
+  final CategoryList categoryList;
   ApplicationBloc appBloc;
 
-  @override
-  void initState() {
-    super.initState();
-//    _tabController = new TabController(vsync: this, length: 6, initialIndex: 0);
-    //_tabController.addListener(_handleTabSelection);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
+  CategoryPage(this.categoryList);
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +21,10 @@ class CategoryPageState extends State<CategoryPage> with SingleTickerProviderSta
     return new StreamBuilder(
         stream: appBloc.outActiveCategory,
         builder: (BuildContext context, AsyncSnapshot<Category> snapshot) {
+          if (snapshot.data == null) {
+            return Container();
+          }
+
           return new Scaffold(
             appBar: new AppBar(
               elevation: 0.0,
@@ -50,7 +33,7 @@ class CategoryPageState extends State<CategoryPage> with SingleTickerProviderSta
               backgroundColor: snapshot.data.color,
             ),
             body: new DefaultTabController(
-              length: widget.categoryList.total,
+              length: categoryList.total,
               child: new Column(
                 children: <Widget>[
                   new Container(
@@ -59,7 +42,6 @@ class CategoryPageState extends State<CategoryPage> with SingleTickerProviderSta
                       color: snapshot.data.color,
                     ),
                     child: new TabBar(
-                      controller: _tabController,
                       isScrollable: false,
                       indicatorColor: Colors.white,
                       tabs: _tabCollections(),
@@ -67,15 +49,7 @@ class CategoryPageState extends State<CategoryPage> with SingleTickerProviderSta
                   ),
                   new Expanded(
                     child: new TabBarView(
-                      controller: _tabController,
-                      children: [
-                        new Icon(Icons.map),
-                        new Icon(Icons.cake),
-                        new Icon(Icons.access_alarm),
-                        new Icon(Icons.offline_pin),
-                        new Icon(Icons.queue),
-                        new Icon(Icons.message),
-                      ],
+                      children: _fragmentCollections(),
                     ),
                   ),
                 ],
@@ -85,20 +59,14 @@ class CategoryPageState extends State<CategoryPage> with SingleTickerProviderSta
         });
   }
 
-  void _handleTabSelection() {
-    widget.categoryList.setActiveCategory(index: _tabController.index);
-    appBloc.inActiveCategory.add(widget.categoryList.active);
-  }
-
   void initBloc(BuildContext context) {
-    this.context = context;
     appBloc = BlocProvider.of<ApplicationBloc>(context);
-    appBloc.inActiveCategory.add(widget.categoryList.active);
+    appBloc.inActiveCategory.add(categoryList.active);
   }
 
   List<Widget> _tabCollections() {
     List<Widget> tabs = List<Widget>();
-    widget.categoryList.list.forEach((category) {
+    categoryList.list.forEach((category) {
       tabs.add(new Tab(
         icon: new Image.asset(
           category.imageLocation,
@@ -109,4 +77,13 @@ class CategoryPageState extends State<CategoryPage> with SingleTickerProviderSta
     });
     return tabs;
   }
+
+  List<Widget> _fragmentCollections() {
+    List<Widget> fragments = List<Widget>();
+    categoryList.list.forEach((category) {
+      fragments.add(new SampleFragment(category));
+    });
+    return fragments;
+  }
+  
 }

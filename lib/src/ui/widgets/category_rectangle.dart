@@ -24,7 +24,7 @@ class CategoryContainer extends StatelessWidget {
           CupertinoPageRoute(builder: (BuildContext context) {
             return BlocProvider<ApplicationBloc>(
               bloc: ApplicationBloc(),
-              child: CategoryPage(categoryList: categoryList),
+              child: CategoryPage(categoryList),
             );
           }),
         );
