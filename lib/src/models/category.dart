@@ -20,14 +20,14 @@ class Category {
 }
 
 class CategoryList {
-  final List<Category> list;
+  final List<Category> data;
   Category active;
 
-  CategoryList(this.list, this.active);
+  CategoryList(this.data, this.active);
 
-  int get total => list.length;
+  int get total => data.length;
 
   void setActiveCategory({int index}) {
-    active = list[index];
+    active = data[index];
   }
 }

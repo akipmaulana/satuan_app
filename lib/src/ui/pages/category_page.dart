@@ -7,13 +7,33 @@ import 'package:satuan_app/src/blocs/application_bloc.dart';
 import 'package:satuan_app/src/blocs/bloc_provider.dart';
 import 'package:satuan_app/src/ui/fragments/sample_fragment.dart';
 
-class CategoryPage extends StatelessWidget {
 
-  DefaultWidget _defaultWidget = DefaultWidget();
+class CategoryPage extends StatefulWidget {
+
   final CategoryList categoryList;
-  ApplicationBloc appBloc;
 
   CategoryPage(this.categoryList);
+
+  @override
+  CategoryPageState createState() => CategoryPageState(this.categoryList);
+
+}
+
+class CategoryPageState extends State<CategoryPage> with SingleTickerProviderStateMixin {
+
+  final DefaultWidget _defaultWidget = DefaultWidget();
+  final CategoryList categoryList;
+  ApplicationBloc appBloc;
+  TabController _tabController;
+
+  CategoryPageState(this.categoryList);
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 6, vsync: this);
+    _tabController.addListener(_handleTabSelection);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +65,12 @@ class CategoryPage extends StatelessWidget {
                       isScrollable: false,
                       indicatorColor: Colors.white,
                       tabs: _tabCollections(),
+                      controller: _tabController,
                     ),
                   ),
                   new Expanded(
                     child: new TabBarView(
+                      controller: _tabController,
                       children: _fragmentCollections(),
                     ),
                   ),
@@ -64,9 +86,14 @@ class CategoryPage extends StatelessWidget {
     appBloc.inActiveCategory.add(categoryList.active);
   }
 
+  void _handleTabSelection() {
+    categoryList.setActiveCategory(index: _tabController.index);
+    appBloc.inActiveCategory.add(categoryList.active);
+  }
+
   List<Widget> _tabCollections() {
     List<Widget> tabs = List<Widget>();
-    categoryList.list.forEach((category) {
+    categoryList.data.forEach((category) {
       tabs.add(new Tab(
         icon: new Image.asset(
           category.imageLocation,
@@ -80,7 +107,7 @@ class CategoryPage extends StatelessWidget {
 
   List<Widget> _fragmentCollections() {
     List<Widget> fragments = List<Widget>();
-    categoryList.list.forEach((category) {
+    categoryList.data.forEach((category) {
       fragments.add(new SampleFragment(category));
     });
     return fragments;
