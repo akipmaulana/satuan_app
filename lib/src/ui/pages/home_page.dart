@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
                 if (snapshot.data != null) {
                   CategoryList categoryList = CategoryList(
                       snapshot.data, category);
-                  return new CategoryContainer(categoryList);
+                  return new CategoryContainer(category.index, categoryList);
                 }
                 return new Container();
               }).toList(),

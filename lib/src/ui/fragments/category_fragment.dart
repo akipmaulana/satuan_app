@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:satuan_app/src/blocs/bloc_provider.dart';
-import 'package:satuan_app/src/blocs/application_bloc.dart';
 import 'package:satuan_app/src/models/category.dart';
 
-class SampleFragment extends StatelessWidget {
+class CategoryFragment extends StatelessWidget {
 
   final Category category;
 
-  SampleFragment(this.category);
+  CategoryFragment(this.category);
 
   @override
   Widget build(BuildContext context) {

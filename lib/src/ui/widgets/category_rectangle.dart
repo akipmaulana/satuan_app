@@ -9,9 +9,10 @@ import 'package:satuan_app/src/ui/pages/category_page.dart';
 
 class CategoryContainer extends StatelessWidget {
 
+  final int index;
   final CategoryList categoryList;
 
-  CategoryContainer(this.categoryList);
+  CategoryContainer(this.index, this.categoryList);
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,7 @@ class CategoryContainer extends StatelessWidget {
       highlightColor: categoryList.active.color,
       splashColor: categoryList.active.color,
       onTap: () {
+        categoryList.setActiveCategory(index: index);
         Navigator.of(context).push(
           CupertinoPageRoute(builder: (BuildContext context) {
             return BlocProvider<ApplicationBloc>(

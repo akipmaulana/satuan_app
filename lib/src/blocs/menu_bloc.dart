@@ -12,12 +12,12 @@ class MenuBloc extends BlocBase {
 
   MenuBloc() {
     var _categories = <Category>[
-      Category(CategoryType.weight, 'Berat', 'assets/images/weight.png', DefaultColor.green),
-      Category(CategoryType.length, 'Panjang', 'assets/images/length.png', DefaultColor.blue),
-      Category(CategoryType.area, 'Area', 'assets/images/area.png', DefaultColor.amber),
-      Category(CategoryType.volume, 'Volume', 'assets/images/volume.png', DefaultColor.red),
-      Category(CategoryType.time, 'Waktu', 'assets/images/time.png', DefaultColor.orange),
-      Category(CategoryType.temparature, 'Suhu', 'assets/images/temperature.png', DefaultColor.lime),
+      Category(index: 0, type: CategoryType.weight, title: 'Berat', imageLocation: 'assets/images/weight.png', color: DefaultColor.green),
+      Category(index: 1, type: CategoryType.length, title: 'Panjang', imageLocation: 'assets/images/length.png', color: DefaultColor.blue),
+      Category(index: 2, type: CategoryType.area, title: 'Area', imageLocation: 'assets/images/area.png', color: DefaultColor.amber),
+      Category(index: 3, type: CategoryType.volume, title: 'Volume', imageLocation: 'assets/images/volume.png', color: DefaultColor.red),
+      Category(index: 4, type: CategoryType.time, title: 'Waktu', imageLocation: 'assets/images/time.png', color: DefaultColor.orange),
+      Category(index: 5, type: CategoryType.temparature, title: 'Suhu', imageLocation: 'assets/images/temperature.png', color: DefaultColor.lime),
     ];
 
     _inMenus.add(_categories);
