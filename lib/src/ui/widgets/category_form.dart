@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
 
 import 'package:satuan_app/src/models/unit.dart';
+import 'package:satuan_app/src/models/category.dart';
 import 'package:satuan_app/src/ui/themes/default_widget.dart';
 
 class CategoryForm extends StatefulWidget {
+
+  final Category category;
+
+  CategoryForm({this.category});
+
   @override
   State<StatefulWidget> createState() {
-    return CategoryFormState();
+    return CategoryFormState(category: category);
   }
 }
 
 class CategoryFormState extends State<CategoryForm> {
   final _formKey = GlobalKey<FormState>();
+  final Category category;
 
   DefaultWidget _defaultWidget = new DefaultWidget();
 
-  List<Unit> units = <Unit>[
-    Unit(index: 0, title: 'Ton', abbreviation: 'ton', value: 0.0),
-    Unit(index: 1, title: 'Kwintal', abbreviation: 'kw', value: 0.0),
-    Unit(index: 2, title: 'Kilogram', abbreviation: 'kg', value: 0.0),
-    Unit(index: 3, title: 'Hektogram', abbreviation: 'hg (ons)', value: 0.0),
-    Unit(index: 4, title: 'Dekagram', abbreviation: 'dag', value: 0.0),
-    Unit(index: 5, title: 'Gram', abbreviation: 'g', value: 0.0),
-    Unit(index: 6, title: 'Desigram', abbreviation: 'dg', value: 0.0),
-    Unit(index: 7, title: 'Sentigram', abbreviation: 'cg', value: 0.0),
-  ];
+  CategoryFormState({this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +50,7 @@ class CategoryFormState extends State<CategoryForm> {
   }
 
   List<Widget> fieldCollections() {
-    return units.map((Unit unit) {
+    return category.units.map((Unit unit) {
       return _defaultWidget.textFormField(unit);
     }).toList();
   }
