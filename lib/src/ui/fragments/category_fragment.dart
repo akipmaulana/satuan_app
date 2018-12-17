@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:satuan_app/src/ui/widgets/category_form.dart';
 import 'package:satuan_app/src/models/category.dart';
 
 class CategoryFragment extends StatelessWidget {
@@ -10,12 +11,9 @@ class CategoryFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Image.asset(
-      category.imageLocation,
-      width: 32.0,
-      height: 32.0,
-      color: category.color,
-    );
+    return CategoryForm();
   }
+
+
 
 }

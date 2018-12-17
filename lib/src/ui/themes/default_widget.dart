@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'default_style.dart';
 import 'default_res.dart';
+import 'package:satuan_app/src/models/unit.dart';
 
 class DefaultWidget {
   DefaultStyle _defaultStyle = new DefaultStyle();
@@ -20,6 +21,19 @@ class DefaultWidget {
       maxLines: 1,
       textAlign: TextAlign.center,
       style: _defaultStyle.textTitle(color == null ? Colors.white : color ),
+    );
+  }
+
+  TextFormField textFormField(Unit unit) {
+    return TextFormField(
+      keyboardType: TextInputType.numberWithOptions(),
+      decoration: InputDecoration(
+        labelText: unit.abbreviation,
+        helperText: unit.title,
+        helperStyle: _defaultStyle.helperTextField(),
+      ),
+      textDirection: TextDirection.rtl,
+      initialValue: '1',
     );
   }
 
