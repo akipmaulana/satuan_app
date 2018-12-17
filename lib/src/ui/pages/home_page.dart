@@ -32,8 +32,6 @@ class HomePage extends StatelessWidget {
               crossAxisCount: 2,
               children: snapshot.data.map((category) {
                 if (snapshot.data != null) {
-                  CategoryList categoryList = CategoryList(
-                      snapshot.data, category);
                   return new CategoryContainer(category);
                 }
                 return new Container();

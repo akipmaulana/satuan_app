@@ -20,18 +20,3 @@ class Category {
 
   Category({this.type, this.title, this.imageLocation, this.color, this.index, this.units});
 }
-
-class CategoryList {
-  final List<Category> data;
-  Category active;
-  int selectedIndex;
-
-  CategoryList(this.data, this.active);
-
-  int get total => data.length;
-
-  void setActiveCategory({int index}) {
-    this.selectedIndex = index;
-    active = data[index];
-  }
-}
