@@ -5,28 +5,27 @@ import 'package:satuan_app/src/models/category.dart';
 import 'package:satuan_app/src/ui/themes/default_res.dart';
 import 'package:satuan_app/src/blocs/bloc_provider.dart';
 import 'package:satuan_app/src/blocs/application_bloc.dart';
+import 'package:satuan_app/src/blocs/menu_bloc.dart';
 import 'package:satuan_app/src/ui/pages/category_page.dart';
 
 class CategoryContainer extends StatelessWidget {
 
-  final int index;
-  final CategoryList categoryList;
+  final Category category;
 
-  CategoryContainer(this.index, this.categoryList);
+  CategoryContainer(this.category);
 
   @override
   Widget build(BuildContext context) {
 
     return new InkWell(
-      highlightColor: categoryList.active.color,
-      splashColor: categoryList.active.color,
+      highlightColor: category.color,
+      splashColor: category.color,
       onTap: () {
-        categoryList.setActiveCategory(index: index);
         Navigator.of(context).push(
           CupertinoPageRoute(builder: (BuildContext context) {
-            return BlocProvider<ApplicationBloc>(
-              bloc: ApplicationBloc(),
-              child: CategoryPage(categoryList),
+            return BlocProvider<MenuBloc>(
+              bloc: MenuBloc(),
+              child: CategoryPage(category),
             );
           }),
         );
@@ -34,7 +33,7 @@ class CategoryContainer extends StatelessWidget {
       child: new Container(
         decoration: new BoxDecoration(
           borderRadius: BorderRadius.circular(4.0),
-          color: categoryList.active.color,
+          color: category.color,
         ),
         margin: new EdgeInsets.all(2.0),
         child: new Center(
@@ -44,12 +43,12 @@ class CategoryContainer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 new Image.asset(
-                  categoryList.active.imageLocation,
+                  category.imageLocation,
                   width: 48.0,
                   height: 48.0,
                 ),
                 new Text(
-                  categoryList.active.title,
+                  category.title,
                   style: new TextStyle(
                     fontSize: DefaultDimen.textMedium,
                     color: Colors.white,

@@ -10,20 +10,17 @@ import 'package:satuan_app/src/ui/widgets/category_tab_controller.dart';
 class CategoryPage extends StatelessWidget {
 
   final DefaultWidget _defaultWidget = DefaultWidget();
-  final CategoryList categoryList;
+  final Category category;
 
-  CategoryPage(this.categoryList);
+  CategoryPage(this.category);
 
   @override
   Widget build(BuildContext context) {
     ApplicationBloc appBloc = BlocProvider.of<ApplicationBloc>(context);
-    return new StreamBuilder(
+    return new StreamBuilder<Category>(
         stream: appBloc.outActiveCategory,
-        initialData: categoryList.active,
+        initialData: category,
         builder: (BuildContext context, AsyncSnapshot<Category> snapshot) {
-          if (snapshot.data == null) {
-            return Container();
-          }
           return new Scaffold(
             appBar: new AppBar(
               elevation: 0.0,
@@ -31,7 +28,7 @@ class CategoryPage extends StatelessWidget {
               title: _defaultWidget.titleBar(snapshot.data.title),
               backgroundColor: snapshot.data.color,
             ),
-            body: CategoryTabController(categoryList),
+            body: CategoryTabController(snapshot.data),
           );
         });
   }
