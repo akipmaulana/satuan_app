@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:satuan_app/src/ui/themes/default_widget.dart';
 import 'package:satuan_app/src/models/category.dart';
 import 'package:satuan_app/src/blocs/application_bloc.dart';
+import 'package:satuan_app/src/blocs/menu_bloc.dart';
 import 'package:satuan_app/src/blocs/bloc_provider.dart';
-import 'package:satuan_app/src/ui/fragments/category_fragment.dart';
 import 'package:satuan_app/src/ui/widgets/category_tab_controller.dart';
 
 class CategoryPage extends StatelessWidget {
-
   final DefaultWidget _defaultWidget = DefaultWidget();
   final Category category;
 
@@ -17,10 +16,11 @@ class CategoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ApplicationBloc appBloc = BlocProvider.of<ApplicationBloc>(context);
+    MenuBloc menuBloc = BlocProvider.of<MenuBloc>(context);
     return new StreamBuilder<Category>(
         stream: appBloc.outActiveCategory,
         initialData: category,
-        builder: (BuildContext context, AsyncSnapshot<Category> snapshot) {
+        builder: (context, snapshot) {
           return new Scaffold(
             appBar: new AppBar(
               elevation: 0.0,
@@ -28,7 +28,15 @@ class CategoryPage extends StatelessWidget {
               title: _defaultWidget.titleBar(snapshot.data.title),
               backgroundColor: snapshot.data.color,
             ),
-            body: CategoryTabController(snapshot.data),
+            body: new StreamBuilder<List<Category>>(
+              stream: menuBloc.outMenus,
+              builder: (context, snapshots) {
+                if (snapshots.connectionState == ConnectionState.waiting) {
+                  return Container();
+                }
+                return CategoryTabController(snapshots.data, snapshot.data);
+              },
+            ),
           );
         });
   }

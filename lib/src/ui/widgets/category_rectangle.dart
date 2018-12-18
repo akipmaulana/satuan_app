@@ -16,7 +16,7 @@ class CategoryContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    ApplicationBloc appBloc = BlocProvider.of<ApplicationBloc>(context);
     return new InkWell(
       highlightColor: category.color,
       splashColor: category.color,
@@ -29,6 +29,7 @@ class CategoryContainer extends StatelessWidget {
             );
           }),
         );
+        appBloc.inActiveCategory.add(category);
       },
       child: new Container(
         decoration: new BoxDecoration(
