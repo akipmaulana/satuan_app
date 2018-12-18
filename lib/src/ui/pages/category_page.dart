@@ -15,8 +15,8 @@ class CategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ApplicationBloc appBloc = BlocProvider.of<ApplicationBloc>(context);
-    MenuBloc menuBloc = BlocProvider.of<MenuBloc>(context);
+    final ApplicationBloc appBloc = BlocProvider.of<ApplicationBloc>(context);
+    final MenuBloc menuBloc = BlocProvider.of<MenuBloc>(context);
     return new StreamBuilder<Category>(
         stream: appBloc.outActiveCategory,
         initialData: category,
@@ -28,14 +28,9 @@ class CategoryPage extends StatelessWidget {
               title: _defaultWidget.titleBar(snapshot.data.title),
               backgroundColor: snapshot.data.color,
             ),
-            body: new StreamBuilder<List<Category>>(
-              stream: menuBloc.outMenus,
-              builder: (context, snapshots) {
-                if (snapshots.connectionState == ConnectionState.waiting) {
-                  return Container();
-                }
-                return CategoryTabController(snapshots.data, snapshot.data);
-              },
+            body: CategoryTabController(
+              menuBloc.categories,
+              snapshot.data,
             ),
           );
         });
