@@ -21,5 +21,29 @@ class CategoryTemperature implements Category {
 
   @override
   List<Unit> units = [
+    Unit(
+      index: 0,
+      title: 'Celcius',
+      abbreviation: 'C',
+      value: 0.0,
+    ),
+    Unit(
+      index: 1,
+      title: 'Farenheit',
+      abbreviation: 'F',
+      value: 0.0,
+    ),
+    Unit(
+      index: 2,
+      title: 'Kelvin',
+      abbreviation: 'K',
+      value: 0.0,
+    ),
+    Unit(
+      index: 3,
+      title: 'Reamur',
+      abbreviation: 'R',
+      value: 0.0,
+    ),
   ];
 }
