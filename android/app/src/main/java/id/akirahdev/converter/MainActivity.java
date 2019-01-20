@@ -1,4 +1,4 @@
-package satuan.akirah.id.satuanapp;
+package id.akirahdev.converter;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
