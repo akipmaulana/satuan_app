@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Converter',
       theme: ThemeData(
         fontFamily: 'Open Sans',

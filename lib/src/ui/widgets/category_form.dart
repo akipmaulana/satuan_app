@@ -43,55 +43,51 @@ class CategoryFormState extends State<CategoryForm>
 
   @override
   Widget build(BuildContext context) {
-    return new CustomScrollView(
-      slivers: <Widget>[
-        SliverList(
-          delegate: SliverChildListDelegate(
-            [
-              Container(
-                padding: EdgeInsets.all(16),
-                child: didCalculated
-                    ? Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: _renderResultUnits(),
-                        ),
-                      )
-                    : _defaultWidget.textFormField(
-                        autoFocus: true,
-                        controller: _textEditingController,
-                        label: "Satuan",
-                        helper: "Nilai ini akan dikonversi",
-                        suffixText: sourceUnit.toUpperCase(),
-                        onPressed: () {
-                          _showPickerWidget();
-                        }),
-              ),
-              Container(
-                padding: EdgeInsets.all(DefaultDimen.spaceLarge),
-                child: MaterialButton(
-                  height: DefaultDimen.buttonHeight,
-                  color: widget.category.color,
-                  onPressed: () {
-                    didCalculated
-                        ? _calculateAgain()
-                        : _calculateEachUnit(
-                            sourceValue: _textEditingController.text);
-                  },
-                  child: Text(
-                    didCalculated ? "ULANGI" : "HITUNG",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: DefaultFontWight.medium,
-                    ),
-                  ),
+    return Scaffold(
+      resizeToAvoidBottomPadding: false,
+      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          didCalculated
+              ? _calculateAgain()
+              : _calculateEachUnit(
+              sourceValue: _textEditingController.text);
+        },
+        child: didCalculated ? Icon(Icons.refresh) : Icon(Icons.swap_vert),
+        backgroundColor: widget.category.color,
+      ),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Container(
+                  padding: EdgeInsets.all(16),
+                  child: didCalculated
+                      ? Form(
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: _renderResultUnits(),
+                          ),
+                        )
+                      : _defaultWidget.textFormField(
+                          autoFocus: true,
+                          controller: _textEditingController,
+                          label: "Satuan",
+                          helper: "Nilai ini akan dikonversi",
+                          suffixText: sourceUnit.toUpperCase(),
+                          onPressed: () {
+                            _showPickerWidget();
+                          }),
                 ),
-              ),
-            ],
+                Container(),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
