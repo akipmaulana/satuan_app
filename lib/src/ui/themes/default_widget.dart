@@ -20,11 +20,13 @@ class DefaultWidget {
       text,
       maxLines: 1,
       textAlign: TextAlign.center,
-      style: _defaultStyle.textTitle(color == null ? Colors.white : color ),
+      style: _defaultStyle.textTitle(color == null ? Colors.white : color),
     );
   }
 
-  TextFormField textFormField(Unit unit) {
+  TextFormField textFormField({
+    @required Unit unit,
+  }) {
     return TextFormField(
       keyboardType: TextInputType.numberWithOptions(),
       decoration: InputDecoration(
@@ -32,17 +34,19 @@ class DefaultWidget {
         helperText: unit.title,
         helperStyle: _defaultStyle.helperTextField(),
       ),
+      controller: unit.controller,
       textDirection: TextDirection.rtl,
-      initialValue: '1',
     );
   }
 
-  dynamic paddingSymmetric(double horizontal, double vertical, {bool isWrap = true}) {
-    final edgeInset = EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical);
+  dynamic paddingSymmetric(double horizontal, double vertical,
+      {bool isWrap = true}) {
+    final edgeInset =
+        EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical);
     return isWrap
         ? edgeInset
         : Padding(
-      padding: edgeInset,
-    );
+            padding: edgeInset,
+          );
   }
 }

@@ -12,17 +12,14 @@ class CategoryForm extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return CategoryFormState(category: category);
+    return CategoryFormState();
   }
 }
 
 class CategoryFormState extends State<CategoryForm> {
   final _formKey = GlobalKey<FormState>();
-  final Category category;
-
   DefaultWidget _defaultWidget = new DefaultWidget();
-
-  CategoryFormState({this.category});
+  List<TextEditingController> controllers = List<TextEditingController>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +47,8 @@ class CategoryFormState extends State<CategoryForm> {
   }
 
   List<Widget> fieldCollections() {
-    return category.units.map((Unit unit) {
-      return _defaultWidget.textFormField(unit);
+    return widget.category.units.map((Unit unit) {
+      return _defaultWidget.textFormField(unit: unit);
     }).toList();
   }
 }
