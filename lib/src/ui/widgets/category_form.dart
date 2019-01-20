@@ -6,6 +6,7 @@ import 'package:satuan_app/src/models/unit.dart';
 import 'package:satuan_app/src/models/category.dart';
 import 'package:satuan_app/src/ui/themes/default_widget.dart';
 import 'package:satuan_app/src/ui/themes/default_res.dart';
+import 'package:satuan_app/src/ui/widgets/unit_calculation_result_list.dart';
 
 class CategoryForm extends StatefulWidget {
   final Category category;
@@ -20,11 +21,10 @@ class CategoryForm extends StatefulWidget {
 
 class CategoryFormState extends State<CategoryForm>
     with AutomaticKeepAliveClientMixin<CategoryForm> {
-  final _formKey = GlobalKey<FormState>();
   final TextEditingController _textEditingController = TextEditingController();
   DefaultWidget _defaultWidget = new DefaultWidget();
   bool didCalculated = false;
-  String sourceUnit = "";
+  Unit sourceUnit;
   List<Unit> _resultUnits = List<Unit>();
 
   @override
@@ -38,7 +38,7 @@ class CategoryFormState extends State<CategoryForm>
   void initState() {
     // TODO: implement initState
     super.initState();
-    sourceUnit = widget.category.units.first.abbreviation;
+    sourceUnit = widget.category.units.first;
   }
 
   @override
@@ -51,8 +51,7 @@ class CategoryFormState extends State<CategoryForm>
         onPressed: () {
           didCalculated
               ? _calculateAgain()
-              : _calculateEachUnit(
-              sourceValue: _textEditingController.text);
+              : _calculateEachUnit(sourceValue: _textEditingController.text);
         },
         child: didCalculated ? Icon(Icons.refresh) : Icon(Icons.swap_vert),
         backgroundColor: widget.category.color,
@@ -65,19 +64,17 @@ class CategoryFormState extends State<CategoryForm>
                 Container(
                   padding: EdgeInsets.all(16),
                   child: didCalculated
-                      ? Form(
-                          key: _formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: _renderResultUnits(),
-                          ),
+                      ? UnitCalculationResultList(
+                          resultUnits: _resultUnits,
+                          category: widget.category,
+                          sourceUnit: sourceUnit,
                         )
                       : _defaultWidget.textFormField(
                           autoFocus: true,
                           controller: _textEditingController,
-                          label: "Satuan",
+                          label: sourceUnit?.title,
                           helper: "Nilai ini akan dikonversi",
-                          suffixText: sourceUnit.toUpperCase(),
+                          suffixText: sourceUnit?.abbreviation.toUpperCase(),
                           onPressed: () {
                             _showPickerWidget();
                           }),
@@ -111,67 +108,10 @@ class CategoryFormState extends State<CategoryForm>
       confirmText: "PILIH",
       onConfirm: (Picker picker, List value) {
         final int idx = value.first;
-        sourceUnit = widget.category.units[idx].abbreviation;
+        sourceUnit = widget.category.units[idx];
         setState(() {});
       },
     ).showModal(this.context);
-  }
-
-  List<Widget> _renderResultUnits() {
-    return _resultUnits.map((Unit unit) {
-      return Container(
-        margin: EdgeInsets.only(bottom: 8),
-        decoration: BoxDecoration(
-          color: sourceUnit == unit.abbreviation
-              ? DefaultColor.darkGray3
-              : widget.category.color,
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Row(
-          children: <Widget>[
-            Container(
-              width: 8,
-            ),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.all(DefaultDimen.spaceMedium),
-                decoration: BoxDecoration(
-                  color: DefaultColor.lightGray1,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(4),
-                    bottomRight: Radius.circular(4),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        _defaultWidget.buildText(
-                          text: unit.title,
-                          fontWeight: DefaultFontWight.bold,
-                        ),
-                        _defaultWidget.buildText(
-                          text: unit.abbreviation,
-                        ),
-                      ],
-                    ),
-                    _defaultWidget.buildText(
-                      text: unit.value.toString(),
-                      fontWeight: DefaultFontWight.medium,
-                      fontSize: DefaultDimen.textLarge,
-                      color: Colors.purple,
-                    ),
-                  ],
-                ),
-              ),
-              flex: 3,
-            ),
-          ],
-        ),
-      );
-    }).toList();
   }
 
   void _calculateAgain() {
