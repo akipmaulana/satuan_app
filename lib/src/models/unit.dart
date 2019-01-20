@@ -6,8 +6,7 @@ class Unit {
   final int index;
   final String title;
   final String abbreviation;
-  final double value;
-  final TextEditingController controller;
+  double value = 0.0;
 
-  const Unit({this.index, this.title, this.abbreviation, this.value, this.controller});
+  Unit({this.index, this.title, this.abbreviation, this.value});
 }

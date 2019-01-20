@@ -24,18 +24,60 @@ class DefaultWidget {
     );
   }
 
+  Text buildText({
+    @required String text,
+    Color color,
+    FontWeight fontWeight,
+    int maxLines = 99,
+    double fontSize,
+  }) {
+    return Text(
+      text,
+      maxLines: maxLines,
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: color ?? DefaultColor.darkGray2,
+        fontWeight: fontWeight,
+        fontSize: fontSize ?? DefaultDimen.textMedium,
+      ),
+    );
+  }
+
   TextFormField textFormField({
-    @required Unit unit,
+    String label,
+    String helper,
+    String suffixText,
+    TextEditingController controller,
+    TextDirection textDirection,
+    Function onPressed,
+    bool autoFocus = false,
   }) {
     return TextFormField(
+      autofocus: autoFocus,
       keyboardType: TextInputType.numberWithOptions(),
       decoration: InputDecoration(
-        labelText: unit.abbreviation,
-        helperText: unit.title,
+        labelText: label,
+        helperText: helper,
         helperStyle: _defaultStyle.helperTextField(),
+        suffix: suffixText != null
+            ? FlatButton(
+                onPressed: () {
+                  onPressed();
+                },
+                child: Text(
+                  suffixText,
+                  style: TextStyle(
+                    fontWeight: DefaultFontWight.bold,
+                  ),
+                ),
+                textTheme: ButtonTextTheme.primary,
+              )
+            : Container(
+                width: DefaultDimen.spaceDoubleExtraLarge,
+              ),
       ),
-      controller: unit.controller,
-      textDirection: TextDirection.rtl,
+      controller: controller,
+      textDirection: textDirection,
     );
   }
 

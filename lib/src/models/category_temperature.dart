@@ -26,28 +26,24 @@ class CategoryTemperature implements Category {
       title: 'Celcius',
       abbreviation: 'C',
       value: 0.0,
-      controller: TextEditingController(text: Unit.defaultValueUnit),
     ),
     Unit(
       index: 1,
       title: 'Farenheit',
       abbreviation: 'F',
       value: 0.0,
-      controller: TextEditingController(text: Unit.defaultValueUnit),
     ),
     Unit(
       index: 2,
       title: 'Kelvin',
       abbreviation: 'K',
       value: 0.0,
-      controller: TextEditingController(text: Unit.defaultValueUnit),
     ),
     Unit(
       index: 3,
       title: 'Reamur',
       abbreviation: 'R',
       value: 0.0,
-      controller: TextEditingController(text: Unit.defaultValueUnit),
     ),
   ];
 }
