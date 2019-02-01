@@ -10,3 +10,10 @@ class Weight {
   static final String Sentigram = "Sentigram";
 }
 
+class Temperature {
+  static final String Celcius = "Celcius";
+  static final String Farenheit = "Farenheit";
+  static final String Reamur = "Reamur";
+  static final String Kelvin = "Kelvin";
+}
+
