@@ -6,7 +6,7 @@ import 'category.dart';
 import 'unit.dart';
 import 'package:satuan_app/src/ui/themes/default_res.dart';
 
-class CategoryWeight implements Category {
+class CategoryWeight extends Category {
 
   @override
   Color color = DefaultColor.green;
@@ -74,14 +74,6 @@ class CategoryWeight implements Category {
       value: 0.0,
     ),
   ];
-
-  @override
-  List<Unit> calculate({@required String from, @required double value}) {
-    return units.map((unit) {
-      unit.value = calculator(value, from: from, to: unit.title);
-      return unit;
-    }).toList();
-  }
 
   double calculator(double value,
       {@required String from, @required String to}) {

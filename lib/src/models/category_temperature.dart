@@ -51,4 +51,10 @@ class CategoryTemperature implements Category {
   List<Unit> calculate({@required String from, @required double value}) {
     return units;
   }
+
+  @override
+  double calculator(double value, {String from, String to}) {
+    // TODO: implement calculator
+    return null;
+  }
 }

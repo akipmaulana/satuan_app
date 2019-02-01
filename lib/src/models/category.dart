@@ -24,7 +24,15 @@ abstract class Category {
   Color color;
   List<Unit> units;
 
-  List<Unit> calculate({String from, double value});
+  double calculator(double value,
+      {@required String from, @required String to});
+
+  List<Unit> calculate({@required String from, @required double value}) {
+    return units.map((unit) {
+      unit.value = calculator(value, from: from, to: unit.title);
+      return unit;
+    }).toList();
+  }
 }
 
 class CategoryFactory {
