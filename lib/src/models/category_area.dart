@@ -1,9 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'category.dart';
 import 'unit.dart';
 import 'package:satuan_app/src/ui/themes/default_res.dart';
 
-class CategoryArea implements Category {
+class CategoryArea extends Category {
   @override
   Color color = DefaultColor.amber;
 
@@ -22,12 +24,6 @@ class CategoryArea implements Category {
   @override
   List<Unit> units = [
     Unit(
-      index: 0,
-      title: 'Hektar',
-      abbreviation: 'ha',
-      value: 0.0,
-    ),
-    Unit(
       index: 1,
       title: 'Kilometer Persegi',
       abbreviation: 'km2',
@@ -35,8 +31,8 @@ class CategoryArea implements Category {
     ),
     Unit(
       index: 2,
-      title: 'Hektometer Persegi',
-      abbreviation: 'hm2',
+      title: 'Hektometer Persegi / Hektar',
+      abbreviation: 'hm2/ha',
       value: 0.0,
     ),
     Unit(
@@ -71,14 +67,14 @@ class CategoryArea implements Category {
     ),
   ];
 
-  @override
-  List<Unit> calculate({@required String from, @required double value}) {
-    return units;
-  }
-
-  @override
-  double calculator(double value, {String from, String to}) {
-    // TODO: implement calculator
-    return null;
+  double calculator(double value,
+      {@required String from, @required String to}) {
+    if (from == to) {
+      return value;
+    }
+    final startIndex = units.firstWhere((unit) => unit.title == from).index;
+    final endIndex = units.firstWhere((unit) => unit.title == to).index;
+    final exponent = endIndex - startIndex;
+    return value * pow(100, exponent);
   }
 }
