@@ -23,6 +23,8 @@ abstract class Category {
   String imageLocation;
   Color color;
   List<Unit> units;
+
+  List<Unit> calculate({String from, double value});
 }
 
 class CategoryFactory {

@@ -122,10 +122,7 @@ class CategoryFormState extends State<CategoryForm>
   void _calculateEachUnit({String sourceValue}) {
     FocusScope.of(context).requestFocus(new FocusNode());
     didCalculated = true;
-    _resultUnits = widget.category.units.map((unit) {
-      unit.value = (double.parse(sourceValue) ?? 0) * 10;
-      return unit;
-    }).toList();
+    _resultUnits = widget.category.calculate(from: sourceUnit.title, value: double.parse(sourceValue) ?? 0);
     setState(() {});
   }
 

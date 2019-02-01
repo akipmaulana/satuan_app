@@ -9,4 +9,8 @@ class Unit {
   double value = 0.0;
 
   Unit({this.index, this.title, this.abbreviation, this.value});
+
+  void setValue(double raw, {@required String from, @required String to}) {
+
+  }
 }

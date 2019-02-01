@@ -46,4 +46,9 @@ class CategoryTemperature implements Category {
       value: 0.0,
     ),
   ];
+
+  @override
+  List<Unit> calculate({@required String from, @required double value}) {
+    return units;
+  }
 }
