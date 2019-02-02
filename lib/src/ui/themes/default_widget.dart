@@ -30,11 +30,12 @@ class DefaultWidget {
     FontWeight fontWeight,
     int maxLines = 99,
     double fontSize,
+    TextAlign textAlign,
   }) {
     return Text(
       text,
       maxLines: maxLines,
-      textAlign: TextAlign.center,
+      textAlign: textAlign ?? TextAlign.center,
       style: TextStyle(
         color: color ?? DefaultColor.darkGray2,
         fontWeight: fontWeight,

@@ -25,7 +25,9 @@ class CategoryFormState extends State<CategoryForm>
   DefaultWidget _defaultWidget = new DefaultWidget();
   bool didCalculated = false;
   Unit sourceUnit;
+  int selectedIndex = 0;
   List<Unit> _resultUnits = List<Unit>();
+  bool didLoad = false;
 
   @override
   void dispose() {
@@ -42,7 +44,8 @@ class CategoryFormState extends State<CategoryForm>
 
   @override
   Widget build(BuildContext context) {
-    sourceUnit = widget.category.units.first;
+    sourceUnit = widget.category.units[selectedIndex];
+    _resetSelectedSatuan();
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
@@ -108,7 +111,7 @@ class CategoryFormState extends State<CategoryForm>
       confirmText: "PILIH",
       onConfirm: (Picker picker, List value) {
         final int idx = value.first;
-        sourceUnit = widget.category.units[idx];
+        selectedIndex = idx;
         setState(() {});
       },
     ).showModal(this.context);
@@ -124,6 +127,10 @@ class CategoryFormState extends State<CategoryForm>
     didCalculated = true;
     _resultUnits = widget.category.calculate(from: sourceUnit.title, value: double.parse(sourceValue) ?? 0);
     setState(() {});
+  }
+
+  void _resetSelectedSatuan() {
+    selectedIndex = 0;
   }
 
   @override

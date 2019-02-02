@@ -56,11 +56,14 @@ class UnitCalculationResultList extends StatelessWidget {
                           ),
                         ],
                       ),
-                      _defaultWidget.buildText(
-                        text: unit.value.toString(),
-                        fontWeight: DefaultFontWight.medium,
-                        fontSize: DefaultDimen.textLarge,
-                        color: Colors.purple,
+                      Expanded(
+                        child: _defaultWidget.buildText(
+                          text: unit.value.toString(),
+                          fontWeight: DefaultFontWight.medium,
+                          fontSize: DefaultDimen.textLarge,
+                          color: Colors.purple,
+                          textAlign: TextAlign.right,
+                        ),
                       ),
                     ],
                   ),
