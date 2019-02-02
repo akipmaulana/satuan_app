@@ -17,3 +17,19 @@ class Temperature {
   static final String Kelvin = "Kelvin";
 }
 
+class Time {
+  static final String Abad = "Abad";
+  static final String Dekade = "Dekade";
+  static final String Dasawarsa = "Dasawarsa";
+  static final String Windu = "Windu";
+  static final String Lustrum = "Lustrum";
+  static final String Tahun = "Tahun";
+  static final String Semester = "Semester";
+  static final String Bulan = "Bulan";
+  static final String Minggu = "Minggu";
+  static final String Hari = "Hari";
+  static final String Jam = "Jam";
+  static final String Menit = "Menit";
+  static final String Detik = "Detik";
+}
+
