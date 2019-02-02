@@ -38,11 +38,11 @@ class CategoryFormState extends State<CategoryForm>
   void initState() {
     // TODO: implement initState
     super.initState();
-    sourceUnit = widget.category.units.first;
   }
 
   @override
   Widget build(BuildContext context) {
+    sourceUnit = widget.category.units.first;
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
