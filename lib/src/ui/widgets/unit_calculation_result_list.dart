@@ -21,7 +21,7 @@ class UnitCalculationResultList extends StatelessWidget {
         return Container(
           margin: EdgeInsets.only(bottom: 8),
           decoration: BoxDecoration(
-            color: sourceUnit == unit
+            color: sourceUnit.title == unit.title
                 ? DefaultColor.darkGray3
                 : category.color,
             borderRadius: BorderRadius.circular(4),
